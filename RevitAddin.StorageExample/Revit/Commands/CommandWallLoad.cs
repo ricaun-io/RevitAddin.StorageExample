@@ -2,12 +2,11 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.StorageExample.Services;
-using System.Linq;
 
-namespace RevitAddin.StorageExample.Revit
+namespace RevitAddin.StorageExample.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public class CommandWallSelect : IExternalCommand
+    public class CommandWallLoad : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elementSet)
         {
@@ -19,8 +18,13 @@ namespace RevitAddin.StorageExample.Revit
             StorageWallService storageService = new StorageWallService();
 
             var walls = storageService.Select(document);
-
-            TaskDialog.Show("Revit", $"Select {walls.Count()} with Storage");
+            var text = "";
+            foreach (var wall in walls)
+            {
+                var data = storageService.Load(wall);
+                text += $"{wall.Id} - {data}\n";
+            }
+            TaskDialog.Show("Revit", text);
 
             return Result.Succeeded;
         }

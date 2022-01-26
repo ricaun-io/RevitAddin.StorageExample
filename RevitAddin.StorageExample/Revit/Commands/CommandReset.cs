@@ -3,10 +3,10 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.StorageExample.Services;
 
-namespace RevitAddin.StorageExample.Revit
+namespace RevitAddin.StorageExample.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public class CommandWallLoad : IExternalCommand
+    public class CommandReset : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elementSet)
         {
@@ -15,19 +15,18 @@ namespace RevitAddin.StorageExample.Revit
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document document = uidoc.Document;
 
-            StorageWallService storageService = new StorageWallService();
+            var storageService = new StorageProjectInfoService();
 
-            var walls = storageService.Select(document);
-            var text = "";
-            foreach (var wall in walls)
+            using (Transaction transaction = new Transaction(document))
             {
-                var data = storageService.Load(wall);
-                text += $"{wall.Id} - {data}\n";
+                transaction.Start("Reset");
+                storageService.Reset(document);
+                transaction.Commit();
             }
-            TaskDialog.Show("Revit", text);
+
+            TaskDialog.Show("Revit", "Reset ProjectInfo");
 
             return Result.Succeeded;
         }
     }
-
 }

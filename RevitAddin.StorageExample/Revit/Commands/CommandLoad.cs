@@ -3,7 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.StorageExample.Services;
 
-namespace RevitAddin.StorageExample.Revit
+namespace RevitAddin.StorageExample.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
     public class CommandLoad : IExternalCommand
