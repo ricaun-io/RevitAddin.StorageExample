@@ -77,7 +77,7 @@
 
   <PropertyGroup>
     <PackageId>RevitAddin.StorageExample</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <ProjectGuid>{86d20c8e-cba6-409a-bea0-631ce072c71f}</ProjectGuid>
   </PropertyGroup>
 

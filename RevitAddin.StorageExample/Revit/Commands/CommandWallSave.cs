@@ -3,6 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using RevitAddin.StorageExample.Services;
+using RevitAddin.StorageExample.Views;
 using System;
 using System.Linq;
 
@@ -21,6 +22,9 @@ namespace RevitAddin.StorageExample.Revit.Commands
 
             StorageWallService storageService = new StorageWallService();
 
+            InputView inputView = new InputView("Save some Storage on Wall!");
+            if (inputView.ShowDialog() == false) return Result.Succeeded;
+
             var elements = selection.GetElementIds().Select(id => document.GetElement(id));
             var walls = elements.Cast<Wall>();
 
@@ -30,7 +34,7 @@ namespace RevitAddin.StorageExample.Revit.Commands
 
                 foreach (var wall in walls)
                 {
-                    storageService.Save(wall, $"Wall {DateTime.Now}");
+                    storageService.Save(wall, inputView.Text);
                 }
 
                 transaction.Commit();

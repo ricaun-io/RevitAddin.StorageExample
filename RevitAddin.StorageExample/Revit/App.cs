@@ -23,9 +23,13 @@ namespace RevitAddin.StorageExample.Revit
 
             ribbonPanel.AddStackedItems(
                 ribbonPanel.NewPushButtonData<CommandWallSave>("Save Walls"),
-                ribbonPanel.NewPushButtonData<CommandWallLoad>("Load Walls"),
-                ribbonPanel.NewPushButtonData<CommandWallSelect>("Select Walls")
+                ribbonPanel.NewPushButtonData<CommandWallLoad>("Load Walls")
             );
+            ribbonPanel.AddStackedItems(
+                ribbonPanel.NewPushButtonData<CommandWallSelect>("Select Walls"),
+                ribbonPanel.NewPushButtonData<CommandWallReset>("Reset Walls")
+            );
+
 
             return Result.Succeeded;
         }
