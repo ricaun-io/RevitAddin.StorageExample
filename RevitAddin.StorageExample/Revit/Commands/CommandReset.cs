@@ -2,12 +2,11 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.StorageExample.Services;
-using System;
 
-namespace RevitAddin.StorageExample.Revit
+namespace RevitAddin.StorageExample.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public class CommandSave : IExternalCommand
+    public class CommandReset : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elementSet)
         {
@@ -16,20 +15,18 @@ namespace RevitAddin.StorageExample.Revit
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document document = uidoc.Document;
 
-            StorageTextService storageService = new StorageTextService();
-            var projectInfo = document.ProjectInformation;
+            var storageService = new StorageProjectInfoService();
 
             using (Transaction transaction = new Transaction(document))
             {
-                transaction.Start("CommandSave");
-                storageService.Save(projectInfo, $"Teste {DateTime.Now}");
+                transaction.Start("Reset");
+                storageService.Reset(document);
                 transaction.Commit();
             }
 
-            TaskDialog.Show("Revit", storageService.Load(projectInfo));
+            TaskDialog.Show("Revit", "Reset ProjectInfo");
 
             return Result.Succeeded;
         }
     }
-
 }
