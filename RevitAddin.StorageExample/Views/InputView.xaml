@@ -1,0 +1,24 @@
+﻿<Window x:Class="RevitAddin.StorageExample.Views.InputView"
+	DataContext="{Binding RelativeSource={RelativeSource Self}}"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:local="clr-namespace:RevitAddin.StorageExample.Views"
+	mc:Ignorable="d" 
+	>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBox Name="textBox" Height="24" VerticalContentAlignment="Center" Text="{Binding Text}"></TextBox>
+        </Grid>
+        <WrapPanel Grid.Row="1" Margin="0 15 0 0 " HorizontalAlignment="Right">
+            <Button Name="okButton" IsDefault="True" MinWidth="75" Margin="0 0 8 0">Ok</Button>
+            <Button IsCancel="True" MinWidth="75">Cancel</Button>
+        </WrapPanel>
+    </Grid>
+</Window>
