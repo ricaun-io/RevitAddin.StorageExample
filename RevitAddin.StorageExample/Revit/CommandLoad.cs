@@ -15,10 +15,9 @@ namespace RevitAddin.StorageExample.Revit
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document document = uidoc.Document;
 
-            StorageTextService storageService = new StorageTextService();
-            var projectInfo = document.ProjectInformation;
+            var storageService = new StorageProjectInfoService();
 
-            TaskDialog.Show("Revit", storageService.Load(projectInfo));
+            TaskDialog.Show("Revit", storageService.Load(document));
 
             return Result.Succeeded;
         }

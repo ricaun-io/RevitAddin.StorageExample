@@ -3,6 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.StorageExample.Services;
 using System;
+using System.Collections.Generic;
 
 namespace RevitAddin.StorageExample.Revit
 {
@@ -16,17 +17,16 @@ namespace RevitAddin.StorageExample.Revit
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document document = uidoc.Document;
 
-            StorageTextService storageService = new StorageTextService();
-            var projectInfo = document.ProjectInformation;
+            var storageService = new StorageProjectInfoService();
 
             using (Transaction transaction = new Transaction(document))
             {
-                transaction.Start("CommandSave");
-                storageService.Save(projectInfo, $"Teste {DateTime.Now}");
+                transaction.Start("Save");
+                storageService.Save(document, $"ProjectInfo {DateTime.Now}");
                 transaction.Commit();
             }
 
-            TaskDialog.Show("Revit", storageService.Load(projectInfo));
+            TaskDialog.Show("Revit", storageService.Load(document));
 
             return Result.Succeeded;
         }

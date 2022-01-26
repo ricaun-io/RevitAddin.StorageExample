@@ -6,7 +6,7 @@ using RevitAddin.StorageExample.Services;
 namespace RevitAddin.StorageExample.Revit
 {
     [Transaction(TransactionMode.Manual)]
-    public class CommandReset : IExternalCommand
+    public class CommandWallLoad : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elementSet)
         {
@@ -15,18 +15,19 @@ namespace RevitAddin.StorageExample.Revit
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document document = uidoc.Document;
 
-            var storageService = new StorageProjectInfoService();
+            StorageWallService storageService = new StorageWallService();
 
-            using (Transaction transaction = new Transaction(document))
+            var walls = storageService.Select(document);
+            var text = "";
+            foreach (var wall in walls)
             {
-                transaction.Start("Reset");
-                storageService.Reset(document);
-                transaction.Commit();
+                var data = storageService.Load(wall);
+                text += $"{wall.Id} - {data}\n";
             }
-
-            TaskDialog.Show("Revit", storageService.Load(document));
+            TaskDialog.Show("Revit", text);
 
             return Result.Succeeded;
         }
     }
+
 }
