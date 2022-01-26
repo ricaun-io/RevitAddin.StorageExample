@@ -114,8 +114,8 @@ namespace RevitAddin.StorageExample.Services
         private Schema CreateSchema(Guid Guid)
         {
             SchemaBuilder builder = new SchemaBuilder(Guid);
-            builder.SetReadAccessLevel(ReadAccessLevel);
-            builder.SetWriteAccessLevel(WriteAccessLevel);
+            builder.SetReadAccessLevel(this.ReadAccessLevel);
+            builder.SetWriteAccessLevel(this.WriteAccessLevel);
             builder.SetSchemaName(this.SchemaName);
             builder.SetVendorId(this.VendorId);
             builder.SetDocumentation(this.Documentation);
