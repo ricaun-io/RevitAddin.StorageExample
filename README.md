@@ -13,12 +13,16 @@ RevitAddin Example with the [ExtensibleStorage] to store data in the [ProjectInf
 
 * [Latest release](../../releases/latest)
 
+## Video
+
+[![VideoIma]][Video]
+
 ---
 
 Do you like this package? Please [star this project on GitHub](../../stargazers)!
 
-[Video]: https://youtu.be/
-[VideoIma]: https://img.youtube.com/vi//hqdefault.jpg
+[Video]: https://youtu.be/bERyDdaitpo
+[VideoIma]: https://img.youtube.com/vi/bERyDdaitpo/hqdefault.jpg
 
 [ExtensibleStorage]: https://www.revitapidocs.com/2017.1/79486a74-376c-9555-c873-45d5a750f051.htm
 [ProjectInfo]: https://www.revitapidocs.com/2017.1/e90b12f3-9bf4-f536-3556-c9944cbf9f38.htm
