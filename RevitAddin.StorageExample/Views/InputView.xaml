@@ -14,7 +14,31 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBox Name="textBox" Height="24" VerticalContentAlignment="Center" Text="{Binding Text}"></TextBox>
+            <TextBox Name="textBox" Height="24" VerticalContentAlignment="Center" Text="{Binding Text}">
+                <TextBox.Resources>
+                    <VisualBrush
+                        x:Key="tbxText"
+                        AlignmentX="Left"
+                        Stretch="None"
+                        TileMode="None"
+                        Opacity="0.3" >
+                        <VisualBrush.Visual>
+                            <Grid Background="Transparent">
+                                <TextBlock Text="Empty..." Margin="2,0"/>
+                            </Grid>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </TextBox.Resources>
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{StaticResource tbxText}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
         </Grid>
         <WrapPanel Grid.Row="1" Margin="0 15 0 0 " HorizontalAlignment="Right">
             <Button Name="okButton" IsDefault="True" MinWidth="75" Margin="0 0 8 0">Ok</Button>
